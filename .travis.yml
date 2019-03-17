@@ -1,6 +1,13 @@
 language: node_js
-install: npm install
-script: npm test
+stages:
+  - test
+  - deploy
+jobs:
+  include:
+    - stage: test
+      script: npm test
+    - stage: deploy
+      script: npm run deploy
 # deploy:
 #   provider: script
 #   script: deploy.sh
