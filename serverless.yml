@@ -1,0 +1,15 @@
+service: test-express-app
+provider:
+  name: aws
+  runtime: nodejs8.10
+  stage: dev
+  region: eu-west-1
+  environment:
+    TEST_SECRET: ${ssm:/tweetmarks/secret}
+
+functions:
+  app:
+    handler: compiled/index.handler
+    events:
+      - http: ANY /
+      - http: "ANY {proxy+}"
